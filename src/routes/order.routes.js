@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Bag = require("./../models/bag.model");
 const Order = require("../models/order.model");
-const { verifyToken } = require("../middleware/authenticate");
+const { verifyToken } = require("../middleware/Authenticate");
 
 router.use(verifyToken);
 
