@@ -24,7 +24,7 @@ app.use("/product", productRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/bag", bagRouter);
 app.use("/order", orderRouter);
-app.listen(process.env.PORT, () => {
+app.listen(8080, () => {
   try {
     connect.then((res) => {
       console.log("db is connected");
