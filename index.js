@@ -17,18 +17,17 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => [res.send("Home Page")]);
+app.get("/", (req, res) => [res.status(200).json("Home Page")]);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/product", productRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/bag", bagRouter);
 app.use("/order", orderRouter);
-app.listen(8080, () => {
+app.listen(8080, async() => {
   try {
-    connect.then((res) => {
-      console.log("db is connected");
-    });
+   await connect
+   console.log("Db is connected")
     console.log(`Server is running at port 8080`);
   } catch (error) {
     console.log("error:", error);
