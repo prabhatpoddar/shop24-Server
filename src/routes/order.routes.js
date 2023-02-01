@@ -59,7 +59,7 @@ router.get("/find/:userId", verifyUserAndAutherization, async (req, res) => {
 
 // //GET ALL
 
-router.get("/", verifyEmployeeAndAutherization, async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
