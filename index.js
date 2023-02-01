@@ -18,12 +18,12 @@ app.get("/", (req, res) => [res.send("Home Page")]);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/product", productRouter);
-app.listen(process.env.PORT, () => {
+app.listen(8080, () => {
   try {
     connect.then((res) => {
       console.log("db is connected");
     });
-    console.log(`Server is running at port ${process.env.PORT}`);
+    console.log(`Server is running at port 8080`);
   } catch (error) {
     console.log("error:", error);
   }
