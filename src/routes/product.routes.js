@@ -2,7 +2,9 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const {verifyEmployeeAndAutherization} = require("./../middleware/Authenticate");
+const {
+  verifyEmployeeAndAutherization,
+} = require("./../middleware/Authenticate");
 const Product = require("./../models/product.model");
 
 // router.get("/", async (req, res) => {
@@ -26,7 +28,7 @@ router.get("/search", async (req, res) => {
 
   return res.status(200).send({
     length,
-    data:all_searchData
+    data: all_searchData,
   });
 });
 
@@ -173,7 +175,15 @@ router.get("/", async (req, res) => {
     res.status(404).send(e.message);
   }
 });
-
+router.get("/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    let prod = await Product.findById({ _id: id });
+    res.send(prod);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 
 router.put("/:id", verifyEmployeeAndAutherization, async (req, res) => {
   try {
