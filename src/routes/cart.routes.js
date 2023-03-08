@@ -1,4 +1,4 @@
-const Order = require("../models/order.model");
+const Cart = require("../models/Cart.model");
 const {
   verifyToken,
   verifyUserAndAutherization,
@@ -10,7 +10,7 @@ const router = require("express").Router();
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Order(req.body);
+  const newOrder = new Cart(req.body);
 
   try {
     const savedOrder = await newOrder.save();
@@ -23,7 +23,7 @@ router.post("/", verifyToken, async (req, res) => {
 //UPDATE
 router.put("/:id", verifyEmployeeAndAutherization, async (req, res) => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
+    const Order = await Cart.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -39,7 +39,7 @@ router.put("/:id", verifyEmployeeAndAutherization, async (req, res) => {
 //DELETE
 router.delete("/:id", verifyEmployeeAndAutherization, async (req, res) => {
   try {
-    await Order.findByIdAndDelete(req.params.id);
+    await Cart.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted...");
   } catch (err) {
     res.status(500).json(err);
@@ -50,24 +50,12 @@ router.delete("/:id", verifyEmployeeAndAutherization, async (req, res) => {
 router.get("/find/:userId", verifyUserAndAutherization, async (req, res) => {
 
   try {
-    const orders = await Order.find({ userId: req.params.userId });
-    res.status(200).json(orders);
+    const cart = await Cart.find({ userId: req.params.userId });
+    res.status(200).json(cart);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-// //GET ALL
-
-router.get("/", verifyToken, async (req, res) => {
-  try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 
 
 
