@@ -7,16 +7,7 @@ const {
 } = require("./../middleware/Authenticate");
 const Product = require("./../models/product.model");
 
-// router.get("/", async (req, res) => {
-//   const limit = req.query.limit;
 
-//   try {
-//     const product = await ProductModel.find().limit(limit);
-//     res.status(200).json(product);
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
 router.get("/search", async (req, res) => {
   const { search } = req.query;
   const all_searchData = await Product.find({

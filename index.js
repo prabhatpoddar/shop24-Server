@@ -1,7 +1,11 @@
+// import  from 'node:cluster';
 const express = require("express");
 const cors = require("cors");
+
 require("dotenv").config();
 
+
+  
 const connect = require("./src/config/db");
 const authRoutes = require("./src/routes/auth.routes");
 const usersRoutes = require("./src/routes/users.routes");
@@ -32,3 +36,4 @@ app.listen(8080, () => {
     console.log("error:", error);
   }
 });
+
