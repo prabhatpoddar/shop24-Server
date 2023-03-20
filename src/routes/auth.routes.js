@@ -34,14 +34,14 @@ router.post("/login", async (req, res) => {
       bcrypt.compare(password, user[0].password, (err, result) => {
         if (result) {
           const token = jwt.sign(
-            { userID: user[0]._id, isAdmin: user[0].isAdmin },
+            { user: user[0], isAdmin: user[0].isAdmin  },
             "myntra"
           );
 
           res
             .status(200)
             .json({
-              msg: "Login Succesfully",
+              msg: "Login Successfully",
               token: token,
               isAdmin: user[0].isAdmin,
               user: user[0],
@@ -68,13 +68,13 @@ router.post("/loginbynumber", async (req, res) => {
       res
         .status(200)
         .json({
-          msg: "Login Succesfully",
+          msg: "Login Successfully",
           token: token,
           isAdmin: user[0].isAdmin,
           user: user[0],
         });
     } else {
-      res.status(401).json({ msg: "User Dosen't Exist" });
+      res.status(401).json({ msg: "User doesn't Exist" });
     }
   } catch (error) {
     res.status(500).json(error);
